@@ -1,0 +1,20 @@
+<h2>Unit List1</h2>
+<p>hi there</p>
+<p>{{ units.length }}</p>
+
+<table border="1" cellspacing="0" cellpadding="5">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Unit Name</th>
+      <th>Level Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let unit of units">
+      <td>{{ unit.Id }}</td>
+      <td>{{ unit.Name }}</td>
+      <td>{{ unit.LevelId }}</td>
+    </tr>
+  </tbody>
+</table>
