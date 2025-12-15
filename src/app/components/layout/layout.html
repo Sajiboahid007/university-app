@@ -1,0 +1,44 @@
+<div class="layout-container">
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" (click)="toggleSidenav()" aria-label="Toggle menu" type="button">
+        <span>☰</span>
+      </button>
+      <h1 class="app-title">University App</h1>
+    </div>
+    <div class="topbar-right">
+      <div class="user-info">
+        <span class="user-name">Admin</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout-content">
+    <!-- Sidenav -->
+    <aside class="sidenav" [class.open]="isSidenavOpen" [class.closed]="!isSidenavOpen">
+      <nav class="nav-menu">
+        <ul class="menu-list">
+          <li *ngFor="let item of menuItems" class="menu-item">
+            <a
+              class="menu-link"
+              [class.active]="isActiveRoute(item.route)"
+              (click)="navigateTo(item.route)"
+              [routerLink]="item.route"
+              routerLinkActive="active"
+            >
+              <span class="menu-icon">{{ item.icon }}</span>
+              <span class="menu-label">{{ item.label }}</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" [class.sidenav-open]="isSidenavOpen">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
