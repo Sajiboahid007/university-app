@@ -1,1 +1,61 @@
 /* You can add global styles to this file, and also import other style files */
+@use './app/theme/variables' as *;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $content-bg;
+  color: $content-text;
+}
+
+body {
+  overflow: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $neutral-100;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $neutral-300;
+  border-radius: 5px;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $neutral-400;
+  }
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid $primary-500;
+  outline-offset: 2px;
+  border-radius: $radius-sm;
+}
