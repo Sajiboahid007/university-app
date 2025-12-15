@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { UnitService } from '../../services/unit-service';
 import { Subject, takeUntil } from 'rxjs';
 import { Unit } from '../../../shared/entity-model/unit';
@@ -11,8 +11,8 @@ import { Unit } from '../../../shared/entity-model/unit';
 })
 export class UnitList implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
+  units = signal<Unit[]>([]);
 
-  units: Unit[] = [];
   constructor(private readonly unitService: UnitService) {}
 
   public ngOnInit(): void {
@@ -25,7 +25,7 @@ export class UnitList implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          this.units = response?.data;
+          this.units.set(response?.data);
 
           console.log(this.units);
         },
