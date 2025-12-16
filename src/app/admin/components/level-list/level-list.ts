@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { LevelService } from '../../services/level-service';
+import { Subject, takeUntil } from 'rxjs';
+import { Level } from '../../../shared/entity-model/unit';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-level-list',
@@ -6,6 +11,47 @@ import { Component } from '@angular/core';
   templateUrl: './level-list.html',
   styleUrl: './level-list.scss',
 })
-export class LevelList {
+export class LevelList implements OnInit, OnDestroy, AfterViewInit {
+  private destroy$: Subject<void> = new Subject<void>();
+  levels: Level[] = [];
+  dataSource = new MatTableDataSource<Level>([]);
+  isLoading: boolean = true;
+  displayedColumns: string[] = ['id', 'name'];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(private readonly levelService: LevelService) {}
+
+  public ngOnInit(): void {
+    this.getLevels();
+  }
+
+  public ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  private getLevels(): void {
+    this.isLoading = true;
+    this.levelService
+      .getLevels()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          const levelsData = response?.data || [];
+          this.levels = levelsData;
+          this.dataSource.data = levelsData;
+          this.isLoading = false;
+          console.log(this.levels);
+        },
+        error: (error) => {
+          console.error(error);
+          this.isLoading = false;
+        },
+      });
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

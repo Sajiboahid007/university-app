@@ -1,4 +1,5 @@
 @use '../../theme/variables' as *;
+@use 'sass:color';
 
 .layout-container {
   display: flex;
@@ -208,7 +209,7 @@
   left: 0;
   bottom: 0;
   width: $sidebar-width;
-  background: linear-gradient(180deg, $sidebar-bg 0%, darken($sidebar-bg, 2%) 100%);
+  background: linear-gradient(180deg, $sidebar-bg 0%, color.scale($sidebar-bg, $lightness: -2%) 100%);
   box-shadow: $shadow-lg;
   z-index: 998;
   transition: transform $transition-base, width $transition-base;
@@ -381,7 +382,7 @@
   }
 
   &.active {
-    background: linear-gradient(135deg, $sidebar-active-bg 0%, lighten($sidebar-active-bg, 5%) 100%);
+    background: linear-gradient(135deg, $sidebar-active-bg 0%, color.scale($sidebar-active-bg, $lightness: 5%) 100%);
     color: $sidebar-text-active;
     box-shadow: $shadow-md;
 

@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal, ViewChild, AfterViewInit } from '@angular/core';
 import { UnitService } from '../../services/unit-service';
 import { Subject, takeUntil } from 'rxjs';
 import { Unit } from '../../../shared/entity-model/unit';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-unit-list',
@@ -9,9 +11,14 @@ import { Unit } from '../../../shared/entity-model/unit';
   templateUrl: './unit-list.html',
   styleUrl: './unit-list.scss',
 })
-export class UnitList implements OnInit, OnDestroy {
+export class UnitList implements OnInit, OnDestroy, AfterViewInit {
   private destroy$: Subject<void> = new Subject<void>();
   units = signal<Unit[]>([]);
+  dataSource = new MatTableDataSource<Unit>([]);
+  isLoading = signal<boolean>(true);
+  displayedColumns: string[] = ['id', 'name', 'levelId', 'actions'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private readonly unitService: UnitService) {}
 
@@ -19,20 +26,42 @@ export class UnitList implements OnInit, OnDestroy {
     this.getUnits();
   }
 
+  public ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+  }
+
   private getUnits(): void {
+    this.isLoading.set(true);
     this.unitService
       .getUnits()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          this.units.set(response?.data);
-
+          const unitsData = response?.data || [];
+          this.units.set(unitsData);
+          this.dataSource.data = unitsData;
+          this.isLoading.set(false);
           console.log(this.units);
         },
         error: (error) => {
           console.error(error);
+          this.isLoading.set(false);
         },
       });
+  }
+
+  public editUnit(unit: Unit): void {
+    console.log('Edit unit:', unit);
+    // TODO: Implement edit functionality
+    // You can navigate to an edit page or open a dialog
+  }
+
+  public deleteUnit(unit: Unit): void {
+    if (confirm(`Are you sure you want to delete unit "${unit.Name}"?`)) {
+      console.log('Delete unit:', unit);
+      // TODO: Implement delete functionality
+      // Call service to delete unit and refresh the list
+    }
   }
 
   public ngOnDestroy(): void {
