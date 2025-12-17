@@ -26,6 +26,18 @@ export class LayoutComponent {
       icon: '📊',
       description: 'Manage levels',
     },
+    {
+      label: 'room-list',
+      route: '/admin/room-list',
+      icon: '🏠',
+      description: 'Manage levels',
+    },
+    {
+      label: 'Device List',
+      route: '/admin/device-list',
+      icon: '💻',
+      description: 'Manage devices',
+    },
   ];
 
   constructor(private router: Router) {
@@ -59,4 +71,3 @@ export class LayoutComponent {
     return routeValue === route || routeValue.startsWith(route + '/');
   }
 }
-

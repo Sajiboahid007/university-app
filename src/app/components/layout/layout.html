@@ -123,11 +123,14 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="main-content" [class.sidebar-open]="isSidebarOpen()" [class.sidebar-collapsed]="isSidebarCollapsed()">
+    <main
+      class="main-content"
+      [class.sidebar-open]="isSidebarOpen()"
+      [class.sidebar-collapsed]="isSidebarCollapsed()"
+    >
       <div class="content-wrapper">
         <router-outlet></router-outlet>
       </div>
     </main>
   </div>
 </div>
-
