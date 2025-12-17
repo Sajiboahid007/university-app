@@ -8,9 +8,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { BtnSuccess } from './components/btn-success/btn-success';
+import { BtnDanger } from './components/btn-danger/btn-danger';
 
 @NgModule({
-  declarations: [],
+  declarations: [BtnSuccess, BtnDanger],
   imports: [
     CommonModule,
     RouterModule,
@@ -32,6 +34,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatPaginatorModule,
+    BtnSuccess,
+    BtnDanger,
   ],
 })
 export class SharedModule {}

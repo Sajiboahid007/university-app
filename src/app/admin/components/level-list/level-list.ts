@@ -16,7 +16,7 @@ export class LevelList implements OnInit, OnDestroy, AfterViewInit {
   levels: Level[] = [];
   dataSource = new MatTableDataSource<Level>([]);
   isLoading: boolean = true;
-  displayedColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = ['id', 'name', 'actions'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -48,6 +48,14 @@ export class LevelList implements OnInit, OnDestroy, AfterViewInit {
           this.isLoading = false;
         },
       });
+  }
+
+  onEditLevel(level: Level): void {
+    console.log(level);
+  }
+
+  onDeleteLevel(level: Level): void {
+    console.log(level);
   }
 
   public ngOnDestroy(): void {
