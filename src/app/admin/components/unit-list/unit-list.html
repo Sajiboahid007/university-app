@@ -34,13 +34,20 @@
             icon="edit"
             (clicked)="editUnit(unit)"
           ></app-btn-success>
+          <app-btn-danger
+            label="Delete"
+            size="small"
+            icon="delete"
+            (clicked)="onDeleteUnit(unit)"
+          ></app-btn-danger>
         </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons *ngIf="!isLoading()">
-    </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons> </mat-paginator>
   </mat-card-content>
 </mat-card>
+
+<app-room-list></app-room-list>

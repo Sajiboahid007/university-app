@@ -56,12 +56,8 @@ export class UnitList implements OnInit, OnDestroy, AfterViewInit {
     // You can navigate to an edit page or open a dialog
   }
 
-  public deleteUnit(unit: Unit): void {
-    if (confirm(`Are you sure you want to delete unit "${unit.Name}"?`)) {
-      console.log('Delete unit:', unit);
-      // TODO: Implement delete functionality
-      // Call service to delete unit and refresh the list
-    }
+  onDeleteUnit(unit: Unit): void {
+    console.log(unit);
   }
 
   public ngOnDestroy(): void {

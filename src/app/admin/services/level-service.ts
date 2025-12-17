@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Level } from '../../shared/entity-model/unit';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LevelService {
+  baseUrl = 'http://localhost:3000/api/levels';
   // Dummy data for levels
   private dummyLevels: Level[] = [
     { Id: 1, Name: 'Undergraduate' },
@@ -21,13 +23,17 @@ export class LevelService {
     { Id: 10, Name: 'PhD' },
   ];
 
-  constructor() {}
+  constructor(private readonly httpclint: HttpClient) {}
 
-  getLevels(): Observable<ApplicationQuery<Level[]>> {
+  getLevels1(): Observable<ApplicationQuery<Level[]>> {
     // Simulate API call with delay
     return of<ApplicationQuery<Level[]>>({
       message: 'Levels retrieved successfully',
       data: this.dummyLevels,
     }).pipe(delay(500)); // Simulate network delay
+  }
+
+  getLevels(): Observable<ApplicationQuery<Level[]>> {
+    return this.httpclint.get<ApplicationQuery<Level[]>>(this.baseUrl);
   }
 }
