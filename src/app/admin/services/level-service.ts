@@ -3,37 +3,25 @@ import { Observable, of, delay } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Level } from '../../shared/entity-model/unit';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LevelService {
   baseUrl = 'http://localhost:3000/api/levels';
-  // Dummy data for levels
-  private dummyLevels: Level[] = [
-    { Id: 1, Name: 'Undergraduate' },
-    { Id: 2, Name: 'Graduate' },
-    { Id: 3, Name: 'Postgraduate' },
-    { Id: 4, Name: 'Doctorate' },
-    { Id: 5, Name: 'Certificate' },
-    { Id: 6, Name: 'Diploma' },
-    { Id: 7, Name: 'Associate' },
-    { Id: 8, Name: 'Bachelor' },
-    { Id: 9, Name: 'Master' },
-    { Id: 10, Name: 'PhD' },
-  ];
 
-  constructor(private readonly httpclint: HttpClient) {}
+  constructor(private readonly httpclint: HttpClient, private readonly formBuilder: FormBuilder) {}
 
-  getLevels1(): Observable<ApplicationQuery<Level[]>> {
-    // Simulate API call with delay
-    return of<ApplicationQuery<Level[]>>({
-      message: 'Levels retrieved successfully',
-      data: this.dummyLevels,
-    }).pipe(delay(500)); // Simulate network delay
+  public getLevels(): Observable<ApplicationQuery<Level[]>> {
+    return this.httpclint.get<ApplicationQuery<Level[]>>(this.baseUrl);
   }
 
-  getLevels(): Observable<ApplicationQuery<Level[]>> {
-    return this.httpclint.get<ApplicationQuery<Level[]>>(this.baseUrl);
+  public createForm(level: Level | null = null): FormGroup {
+    const levelForm = this.formBuilder.group({
+      Name: [level?.Name || '', [Validators.required, Validators.minLength(2)]],
+    });
+
+    return levelForm;
   }
 }

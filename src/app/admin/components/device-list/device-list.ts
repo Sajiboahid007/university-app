@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DeviceService } from '../../services/device-service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Device } from '../../../shared/entity-model/device';
+import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-device-list',
@@ -24,7 +25,10 @@ export class DeviceList implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.getDevice();
   }
-  constructor(private readonly deviceService: DeviceService) {}
+  constructor(
+    private readonly deviceService: DeviceService,
+    private readonly confirmationDialog: ConfirmationDialogService
+  ) {}
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -47,6 +51,16 @@ export class DeviceList implements OnInit, OnDestroy, AfterViewInit {
         error: (error) => {
           console.error(error);
         },
+      });
+  }
+
+  onDeleted(device: Device): void {
+    this.confirmationDialog
+      .confirmDelete()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((confirmed: boolean) => {
+        if (confirmed) {
+        }
       });
   }
 

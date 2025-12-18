@@ -8,11 +8,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { A11yModule } from '@angular/cdk/a11y';
 import { BtnSuccess } from './components/btn-success/btn-success';
 import { BtnDanger } from './components/btn-danger/btn-danger';
+import { ConfirmationDialog } from './components/confirmation-dialog/confirmation-dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
-  declarations: [BtnSuccess, BtnDanger],
+  declarations: [BtnSuccess, BtnDanger, ConfirmationDialog],
   imports: [
     CommonModule,
     RouterModule,
@@ -23,6 +30,13 @@ import { BtnDanger } from './components/btn-danger/btn-danger';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatDialogModule,
+    A11yModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
   ],
   exports: [
     CommonModule,
@@ -34,8 +48,14 @@ import { BtnDanger } from './components/btn-danger/btn-danger';
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatPaginatorModule,
+    MatDialogModule,
     BtnSuccess,
     BtnDanger,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
   ],
 })
 export class SharedModule {}

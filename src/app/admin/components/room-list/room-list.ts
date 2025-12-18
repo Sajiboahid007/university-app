@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { Subject, takeUntil } from 'rxjs';
 import { RoomService } from '../../services/room-service';
 import { Room } from '../../../shared/entity-model/room';
+import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-room-list',
@@ -21,7 +22,10 @@ export class RoomList implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly roomService: RoomService) {}
+  constructor(
+    private readonly roomService: RoomService,
+    private readonly confirmationDialog: ConfirmationDialogService
+  ) {}
 
   ngOnInit(): void {
     this.getRooms();
@@ -57,10 +61,14 @@ export class RoomList implements OnInit, OnDestroy, AfterViewInit {
     console.log('Edit room:', room);
   }
 
-  onDeleteRoom(room: Room): void {
-    if (confirm(`Are you sure you want to delete room "${room.RoomNo}"?`)) {
-      console.log('Delete room:', room);
-    }
+  onDeleted(room: Room): void {
+    this.confirmationDialog
+      .confirmDelete()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((confirmed: boolean) => {
+        if (confirmed) {
+        }
+      });
   }
 
   ngOnDestroy(): void {

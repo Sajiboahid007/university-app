@@ -44,6 +44,18 @@ export class LayoutComponent {
       icon: '👨‍🔧',
       description: 'Manage devices',
     },
+    {
+      label: 'Complaint List',
+      route: '/admin/complaint-list',
+      icon: '📝',
+      description: 'Manage devices',
+    },
+    {
+      label: 'Complaintlog List',
+      route: '/admin/complaint-log-list',
+      icon: '🚨',
+      description: 'Manage devices',
+    },
   ];
 
   constructor(private router: Router) {

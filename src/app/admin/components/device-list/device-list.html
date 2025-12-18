@@ -45,7 +45,8 @@
         <td mat-cell *matCellDef="let device">
           <app-btn-success label="Edit" size="small" icon="edit"> </app-btn-success>
 
-          <app-btn-danger label="Delete" size="small" icon="delete"> </app-btn-danger>
+          <app-btn-danger label="Delete" size="small" icon="delete" (clicked)="onDeleted(device)">
+          </app-btn-danger>
         </td>
       </ng-container>
 

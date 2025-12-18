@@ -1,7 +1,17 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Level List</mat-card-title>
-    <mat-card-subtitle>Total Levels: {{ levels.length }}</mat-card-subtitle>
+  <mat-card-header class="card-header">
+    <div class="header-content">
+      <div>
+        <mat-card-title>Level List</mat-card-title>
+        <mat-card-subtitle>Total Levels: {{ levels.length }}</mat-card-subtitle>
+      </div>
+      <app-btn-success
+        label="Add"
+        size="medium"
+        icon="add"
+        (clicked)="onAddLevel()"
+      ></app-btn-success>
+    </div>
   </mat-card-header>
   <mat-card-content>
     <div class="loading-container" *ngIf="isLoading">
@@ -33,7 +43,7 @@
             label="Delete"
             size="small"
             icon="delete"
-            (clicked)="onDeleteLevel(level)"
+            (clicked)="onDeleted(level)"
           ></app-btn-danger>
         </td>
       </ng-container>

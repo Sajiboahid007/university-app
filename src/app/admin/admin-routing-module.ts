@@ -5,6 +5,8 @@ import { LevelList } from './components/level-list/level-list';
 import { RoomList } from './components/room-list/room-list';
 import { DeviceList } from './components/device-list/device-list';
 import { TechnicianList } from './components/technician-list/technician-list';
+import { ComplaintList } from './components/complaint-list/complaint-list';
+import { ComplaintLogList } from './components/complaint-log-list/complaint-log-list';
 
 const routes: Routes = [
   {
@@ -26,6 +28,14 @@ const routes: Routes = [
   {
     path: 'technician-list',
     component: TechnicianList,
+  },
+  {
+    path: 'complaint-list',
+    component: ComplaintList,
+  },
+  {
+    path: 'complaint-log-list',
+    component: ComplaintLogList,
   },
 ];
 

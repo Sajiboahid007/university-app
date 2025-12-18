@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Unit } from '../../../shared/entity-model/unit';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-unit-list',
@@ -20,7 +21,10 @@ export class UnitList implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly unitService: UnitService) {}
+  constructor(
+    private readonly unitService: UnitService,
+    private readonly confirmationDialog: ConfirmationDialogService
+  ) {}
 
   public ngOnInit(): void {
     this.getUnits();
@@ -57,7 +61,14 @@ export class UnitList implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onDeleteUnit(unit: Unit): void {
-    console.log(unit);
+    this.confirmationDialog
+      .confirmDelete()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          // Action confirmed
+        }
+      });
   }
 
   public ngOnDestroy(): void {

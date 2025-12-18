@@ -1,0 +1,29 @@
+<div class="form-container">
+  <div class="form-header">
+    <h3 class="form-title">{{ isEditMode ? 'Edit Level' : 'Add New Level' }}</h3>
+    <mat-divider></mat-divider>
+  </div>
+
+  <form [formGroup]="levelForm" class="insert-or-update-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Level Name</mat-label>
+      <input matInput formControlName="Name" placeholder="Enter level name" />
+      <mat-error *ngIf="levelForm.get('Name')?.hasError('required')">
+        Level name is required
+      </mat-error>
+      <mat-error *ngIf="levelForm.get('Name')?.hasError('minlength')">
+        Level name must be at least 2 characters
+      </mat-error>
+      <mat-hint *ngIf="!levelForm.get('Name')?.value">Enter the name of the level</mat-hint>
+    </mat-form-field>
+  </form>
+
+  <div class="form-actions">
+    <app-btn-success label="Discard" (clicked)="onDiscard()" size="medium"></app-btn-success>
+    <app-btn-danger
+      [label]="isEditMode ? 'Update' : 'Save'"
+      (clicked)="onSave()"
+      size="medium"
+    ></app-btn-danger>
+  </div>
+</div>

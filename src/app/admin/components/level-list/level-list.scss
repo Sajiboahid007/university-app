@@ -7,6 +7,19 @@ mat-card {
 
 mat-card-header {
   margin-bottom: 16px;
+
+  &.card-header {
+    width: 100%;
+    padding: 0;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 16px 0;
+  }
 }
 
 table {

@@ -4,6 +4,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { Technician } from '../../../shared/entity-model/technician';
 import { MatPaginator } from '@angular/material/paginator';
+import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-technician-list',
@@ -16,20 +17,18 @@ export class TechnicianList implements OnInit, OnDestroy, AfterViewInit {
 
   technician: Technician[] = [];
   dataSource = new MatTableDataSource<Technician>([]);
-  displayedColumns = ['AssignedArea', 'Id', 'name', 'phone', 'Action'];
+  displayedColumns = ['AssignedArea', 'Name', 'Phone', 'Action'];
   pageSize: number = 5;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(
+    private readonly technicianService: TechniciansService,
+    private readonly confirmationDialog: ConfirmationDialogService
+  ) {}
+
   public ngOnInit(): void {
     this.getTechnician();
-  }
-
-  constructor(private readonly technicianService: TechniciansService) {}
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    if (this.paginator) {
-      this.paginator.pageSize = this.pageSize;
-    }
   }
 
   getTechnician(): void {
@@ -46,6 +45,23 @@ export class TechnicianList implements OnInit, OnDestroy, AfterViewInit {
           console.log(err);
         },
       });
+  }
+
+  onDeleted(technician: Technician): void {
+    this.confirmationDialog
+      .confirmDelete()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((confirmed: boolean) => {
+        if (confirmed) {
+        }
+      });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    if (this.paginator) {
+      this.paginator.pageSize = this.pageSize;
+    }
   }
 
   ngOnDestroy(): void {
