@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Technician List</mat-card-title>
+    <mat-card-subtitle>Total Technician: {{ technician.length }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Table -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+      <!-- Room No -->
+      <ng-container matColumnDef="AssignedArea">
+        <th mat-header-cell *matHeaderCellDef>Assigned Area</th>
+        <td mat-cell *matCellDef="let tech">
+          {{ tech.AssignedArea }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let tech">
+          {{ tech.Id }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let tech">
+          {{ tech.Name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let tech">
+          {{ tech.Phone }}
+        </td>
+      </ng-container>
+
+      <!-- Actions -->
+      <ng-container matColumnDef="Action">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let tech">
+          <app-btn-success label="Edit" size="small" icon="edit"> </app-btn-success>
+
+          <app-btn-danger label="Delete" size="small" icon="delete"> </app-btn-danger>
+        </td>
+      </ng-container>
+
+      <!-- Rows -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" [pageSize]="pageSize" showFirstLastButtons>
+    </mat-paginator>
+  </mat-card-content>
+</mat-card>

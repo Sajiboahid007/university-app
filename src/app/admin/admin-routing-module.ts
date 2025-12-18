@@ -4,6 +4,7 @@ import { UnitList } from './components/unit-list/unit-list';
 import { LevelList } from './components/level-list/level-list';
 import { RoomList } from './components/room-list/room-list';
 import { DeviceList } from './components/device-list/device-list';
+import { TechnicianList } from './components/technician-list/technician-list';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'device-list',
     component: DeviceList,
+  },
+  {
+    path: 'technician-list',
+    component: TechnicianList,
   },
 ];
 

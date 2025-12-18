@@ -38,6 +38,12 @@ export class LayoutComponent {
       icon: '💻',
       description: 'Manage devices',
     },
+    {
+      label: 'Technician List',
+      route: '/admin/technician-list',
+      icon: '👨‍🔧',
+      description: 'Manage devices',
+    },
   ];
 
   constructor(private router: Router) {
