@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { A11yModule } from '@angular/cdk/a11y';
 import { BtnSuccess } from './components/btn-success/btn-success';
 import { BtnDanger } from './components/btn-danger/btn-danger';
@@ -31,6 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatToolbarModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatSnackBarModule,
     A11yModule,
     FormsModule,
     ReactiveFormsModule,
@@ -49,6 +51,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatToolbarModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatSnackBarModule,
     BtnSuccess,
     BtnDanger,
     FormsModule,

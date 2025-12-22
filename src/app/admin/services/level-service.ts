@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay } from 'rxjs';
+import { Observable, of, delay, map } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Level } from '../../shared/entity-model/unit';
 import { HttpClient } from '@angular/common/http';
@@ -23,5 +23,16 @@ export class LevelService {
     });
 
     return levelForm;
+  }
+
+  public save(level: Level): Observable<ApplicationQuery<Level>> {
+    return this.httpclint.post<ApplicationQuery<Level>>(this.baseUrl + '/insert', level).pipe(
+      map((response) => {
+        if (response?.error) {
+          throw new Error(response.error);
+        }
+        return response;
+      })
+    );
   }
 }

@@ -70,12 +70,8 @@ export class LevelList implements OnInit, OnDestroy, AfterViewInit {
     dialogRef
       .afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((result) => {
-        if (result) {
-          console.debug(result);
-          // Refresh the list after successful add
-          this.getLevels();
-        }
+      .subscribe((_) => {
+        this.getLevels();
       });
   }
 
