@@ -1,7 +1,14 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Unit List</mat-card-title>
-    <mat-card-subtitle>Total Units: {{ units().length }}</mat-card-subtitle>
+  <mat-card-header class="card-header">
+    <div class="header-content">
+      <div>
+        <mat-card-title>Unit List</mat-card-title>
+        <mat-card-subtitle>Total Units: {{ units().length }}</mat-card-subtitle>
+      </div>
+
+      <app-btn-success label="Add" size="medium" icon="add" (clicked)="addUnit()">
+      </app-btn-success>
+    </div>
   </mat-card-header>
   <mat-card-content>
     <div class="loading-container" *ngIf="isLoading()">
@@ -20,8 +27,8 @@
       </ng-container>
 
       <ng-container matColumnDef="levelId">
-        <th mat-header-cell *matHeaderCellDef>Level ID</th>
-        <td mat-cell *matCellDef="let unit">{{ unit.LevelId }}</td>
+        <th mat-header-cell *matHeaderCellDef>Level Name</th>
+        <td mat-cell *matCellDef="let unit">{{ unit?.Levels.Name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="actions">

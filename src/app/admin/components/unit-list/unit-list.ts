@@ -5,6 +5,9 @@ import { Unit } from '../../../shared/entity-model/unit';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { Dialog, DialogRef } from '@angular/cdk/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { InsertOrUpdateUnit } from '../insert-or-update-unit/insert-or-update-unit';
 
 @Component({
   selector: 'app-unit-list',
@@ -23,7 +26,8 @@ export class UnitList implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private readonly unitService: UnitService,
-    private readonly confirmationDialog: ConfirmationDialogService
+    private readonly confirmationDialog: ConfirmationDialogService,
+    private readonly dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -58,6 +62,13 @@ export class UnitList implements OnInit, OnDestroy, AfterViewInit {
     console.log('Edit unit:', unit);
     // TODO: Implement edit functionality
     // You can navigate to an edit page or open a dialog
+  }
+
+  public addUnit(): void {
+    const dialogRef = this.dialog.open(InsertOrUpdateUnit, {
+      width: '600px',
+      autoFocus: true,
+    });
   }
 
   onDeleteUnit(unit: Unit): void {

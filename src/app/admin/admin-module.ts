@@ -9,6 +9,7 @@ import { TechnicianList } from './components/technician-list/technician-list';
 import { ComplaintList } from './components/complaint-list/complaint-list';
 import { ComplaintLogList } from './components/complaint-log-list/complaint-log-list';
 import { InsertOrUpdateLevel } from './components/insert-or-update-level/insert-or-update-level';
+import { InsertOrUpdateUnit } from './components/insert-or-update-unit/insert-or-update-unit';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { InsertOrUpdateLevel } from './components/insert-or-update-level/insert-
     ComplaintList,
     ComplaintLogList,
     InsertOrUpdateLevel,
+    InsertOrUpdateUnit,
   ],
   imports: [SharedModule, AdminRoutingModule],
   exports: [],

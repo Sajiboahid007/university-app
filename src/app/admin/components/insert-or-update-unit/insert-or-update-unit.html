@@ -1,0 +1,20 @@
+<div class="form-container">
+  <div class="form-header">
+    <h3 class="form-title">{{ isEditMode ? 'Edite Level' : 'Add New Level' }}</h3>
+    <mat-divider></mat-divider>
+  </div>
+
+  <form [formGroup]="unitForm" class="insert-or-update-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Unit</mat-label>
+      <input matInput formControlName="Name" placeholder="Enter Unit" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Unit</mat-label>
+      <mat-select formControlName="LevelId">
+        <mat-option *ngFor="let level of levels" [value]="level.Id"> {{ level.Name }} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
