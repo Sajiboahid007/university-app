@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Unit } from '../../shared/entity-model/unit';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,5 +22,17 @@ export class UnitService {
       LevelId: [unit?.LevelId || '', [Validators.required]],
     });
     return unitForm;
+  }
+
+  public save(unit: Unit): Observable<ApplicationQuery<Unit[]>> {
+    return this.httpClient.post<ApplicationQuery<Unit[]>>(this.baseUrl + '/insert', unit).pipe(
+      map((response: any) => {
+        if (response?.error) {
+          throw new Error(response.error);
+        }
+        console.log(response.data);
+        return response;
+      })
+    );
   }
 }

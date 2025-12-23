@@ -17,4 +17,21 @@
       </mat-select>
     </mat-form-field>
   </form>
+
+  <div class="form-actions">
+    <app-btn-success
+      label="Discard"
+      [disabled]="isLoading"
+      (clicked)="onDiscard()"
+      size="medium"
+    ></app-btn-success>
+    <app-btn-danger
+      [label]="isEditMode ? 'Update' : 'Save'"
+      [disabled]="isLoading"
+      (clicked)="onSave()"
+      size="medium"
+    ></app-btn-danger>
+
+    <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
+  </div>
 </div>

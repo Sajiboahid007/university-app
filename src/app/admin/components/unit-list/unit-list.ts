@@ -69,6 +69,13 @@ export class UnitList implements OnInit, OnDestroy, AfterViewInit {
       width: '600px',
       autoFocus: true,
     });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((_) => {
+        this.getUnits();
+      });
   }
 
   onDeleteUnit(unit: Unit): void {

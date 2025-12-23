@@ -10,6 +10,7 @@ import { ComplaintList } from './components/complaint-list/complaint-list';
 import { ComplaintLogList } from './components/complaint-log-list/complaint-log-list';
 import { InsertOrUpdateLevel } from './components/insert-or-update-level/insert-or-update-level';
 import { InsertOrUpdateUnit } from './components/insert-or-update-unit/insert-or-update-unit';
+import { InsertOrUpdateRoom } from './components/insert-or-update-room/insert-or-update-room';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { InsertOrUpdateUnit } from './components/insert-or-update-unit/insert-or
     ComplaintLogList,
     InsertOrUpdateLevel,
     InsertOrUpdateUnit,
+    InsertOrUpdateRoom,
   ],
   imports: [SharedModule, AdminRoutingModule],
   exports: [],
