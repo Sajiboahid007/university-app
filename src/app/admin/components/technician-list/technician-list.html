@@ -1,7 +1,13 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Technician List</mat-card-title>
-    <mat-card-subtitle>Total Technician: {{ technician.length }}</mat-card-subtitle>
+  <mat-card-header class="card-header">
+    <div class="header-content">
+      <div>
+        <mat-card-title>Technicians List</mat-card-title>
+        <mat-card-subtitle>Total Technicians: {{ technician.length }} </mat-card-subtitle>
+      </div>
+      <app-btn-success label="Add" size="medium" icon="add" (clicked)="addUnit()">
+      </app-btn-success>
+    </div>
   </mat-card-header>
 
   <mat-card-content>

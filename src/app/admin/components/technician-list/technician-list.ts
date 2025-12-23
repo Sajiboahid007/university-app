@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Technician } from '../../../shared/entity-model/technician';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { InsertOrUpdateTechnician } from '../insert-or-update-technician/insert-or-update-technician';
 
 @Component({
   selector: 'app-technician-list',
@@ -24,7 +26,8 @@ export class TechnicianList implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(
     private readonly technicianService: TechniciansService,
-    private readonly confirmationDialog: ConfirmationDialogService
+    private readonly confirmationDialog: ConfirmationDialogService,
+    private readonly dialog: MatDialog
   ) {}
 
   public ngOnInit(): void {
@@ -40,6 +43,25 @@ export class TechnicianList implements OnInit, OnDestroy, AfterViewInit {
           const technicianData = res?.data || [];
           this.technician = technicianData;
           this.dataSource.data = technicianData;
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  addUnit(): void {
+    const dialog = this.dialog.open(InsertOrUpdateTechnician, {
+      width: '600',
+      autoFocus: true,
+    });
+
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          this.getTechnician();
         },
         error: (err) => {
           console.log(err);

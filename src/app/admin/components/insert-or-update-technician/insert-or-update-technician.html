@@ -1,0 +1,40 @@
+<div class="form-container">
+  <div class="form-header">
+    <h3 class="form-title">{{ isEditMode ? 'Edit Technicians' : 'Add Technicians' }}</h3>
+    <mat-divider></mat-divider>
+  </div>
+  <form [formGroup]="techForm" class="insert-or-update-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Teachnician Area</mat-label>
+      <input matInput formControlName="AssignedArea" placeholder="Enter assigned area.." />
+      <mat-error *ngIf="techForm.get('AssignedArea')?.hasError('required')">
+        Assigned area is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Teachnician Name</mat-label>
+      <input matInput formControlName="Name" placeholder="Enter name.." />
+      <mat-error *ngIf="techForm.get('Name')?.hasError('required')"> Name is required </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Teachnician Phone</mat-label>
+      <input matInput formControlName="Phone" placeholder="Enter phone.." />
+      <mat-error *ngIf="techForm.get('Phone')?.hasError('required')"> Phone is required </mat-error>
+    </mat-form-field>
+  </form>
+
+  <div class="form-actions">
+    <app-btn-success label="Discard" [disabled]="isLoading" (clicked)="onDiscard()" size="medium">
+    </app-btn-success>
+    <app-btn-danger
+      [label]="isEditMode ? 'Update' : 'Save'"
+      [disabled]="isLoading"
+      (clicked)="onSave()"
+      size="medium"
+    >
+    </app-btn-danger>
+    <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
+  </div>
+</div>
