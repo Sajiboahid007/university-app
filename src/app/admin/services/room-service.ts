@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Room } from '../../shared/entity-model/room';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,5 +23,17 @@ export class RoomService {
       UnitId: [rooms?.UnitId || '', [Validators.required]],
     });
     return roomForm;
+  }
+
+  save(rooms: Room): Observable<ApplicationQuery<Room[]>> {
+    return this.httpClient.post<ApplicationQuery<[Room]>>(this.baseUrl + '/insert', rooms).pipe(
+      map((response: any) => {
+        if (response?.error) {
+          throw new Error(response.error);
+        }
+        console.log(response.data);
+        return response;
+      })
+    );
   }
 }
