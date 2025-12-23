@@ -1,0 +1,28 @@
+<div class="form-container">
+  <div class="form-header">
+    <h3 class="form-title">{{ isEditMode ? 'Edit Room' : 'Add Room' }}</h3>
+    <mat-divider></mat-divider>
+  </div>
+
+  <form [formGroup]="roomForm" class="insert-or-update-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Room Name</mat-label>
+      <input matInput formControlName="RoomNo" placeholder="Enter room number..." />
+      <mat-error *ngIf="roomForm.get('RoomNo')?.hasError('required')">
+        Room name is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Name</mat-label>
+      <mat-select formControlName="UnitId"
+        ><mat-option *ngFor="let unit of units" [value]="unit.Id">{{
+          unit.Name
+        }}</mat-option></mat-select
+      >
+
+      <mat-error *ngIf="roomForm.get('UnitId')?.hasError('required')">
+        Unit name is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>

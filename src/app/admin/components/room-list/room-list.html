@@ -1,7 +1,14 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Room List</mat-card-title>
-    <mat-card-subtitle>Total Rooms: {{ rooms.length }}</mat-card-subtitle>
+  <mat-card-header class="card-header">
+    <div class="header-content">
+      <div>
+        <mat-card-title>Room List</mat-card-title>
+        <mat-card-subtitle>Total Rooms: {{ rooms.length }}</mat-card-subtitle>
+      </div>
+
+      <app-btn-success label="Add" size="medium" icon="add" (clicked)="addRoom()">
+      </app-btn-success>
+    </div>
   </mat-card-header>
 
   <mat-card-content>
@@ -34,14 +41,6 @@
         <th mat-header-cell *matHeaderCellDef>Unit</th>
         <td mat-cell *matCellDef="let room">
           {{ room.Units?.Name }}
-        </td>
-      </ng-container>
-
-      <!-- Level -->
-      <ng-container matColumnDef="LevelId">
-        <th mat-header-cell *matHeaderCellDef>Level</th>
-        <td mat-cell *matCellDef="let room">
-          {{ room.Units?.LevelId }}
         </td>
       </ng-container>
 

@@ -5,6 +5,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { RoomService } from '../../services/room-service';
 import { Room } from '../../../shared/entity-model/room';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { MatDialog } from '@angular/material/dialog';
+import { InsertOrUpdateRoom } from '../insert-or-update-room/insert-or-update-room';
 
 @Component({
   selector: 'app-room-list',
@@ -17,14 +19,15 @@ export class RoomList implements OnInit, OnDestroy, AfterViewInit {
   rooms: Room[] = [];
   dataSource = new MatTableDataSource<Room>([]);
   isLoading: boolean = true;
-  displayedColumns: string[] = ['Id', 'RoomNo', 'UnitName', 'LevelId', 'Actions'];
+  displayedColumns: string[] = ['Id', 'RoomNo', 'UnitName', 'Actions'];
   pageSize: number = 10;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private readonly roomService: RoomService,
-    private readonly confirmationDialog: ConfirmationDialogService
+    private readonly confirmationDialog: ConfirmationDialogService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +62,22 @@ export class RoomList implements OnInit, OnDestroy, AfterViewInit {
 
   editRoom(room: Room): void {
     console.log('Edit room:', room);
+  }
+
+  addRoom(): void {
+    const dialog = this.dialog.open(InsertOrUpdateRoom, {
+      width: '600px',
+      autoFocus: 'true',
+    });
+
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (_) => {
+          this.getRooms();
+        },
+      });
   }
 
   onDeleted(room: Room): void {

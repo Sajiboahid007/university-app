@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Room } from '../../shared/entity-model/room';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,17 @@ import { Room } from '../../shared/entity-model/room';
 export class RoomService {
   private baseUrl = 'http://localhost:3000/api/rooms';
 
-  constructor(private readonly httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient, private readonly formBuilder: FormBuilder) {}
 
   getRooms(): Observable<ApplicationQuery<Room[]>> {
     return this.httpClient.get<ApplicationQuery<Room[]>>(this.baseUrl);
+  }
+
+  creatFrom(rooms: Room | null = null): FormGroup {
+    const roomForm = this.formBuilder.group({
+      RoomNo: [rooms?.RoomNo || '', [Validators.required]],
+      UnitId: [rooms?.UnitId || '', [Validators.required]],
+    });
+    return roomForm;
   }
 }
