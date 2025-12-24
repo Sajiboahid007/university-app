@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ApplicationQuery } from '../../shared/model/app-query';
 import { Technician } from '../../shared/entity-model/technician';
 import { N } from '@angular/cdk/keycodes';
@@ -25,5 +25,19 @@ export class TechniciansService {
       Phone: [tech?.Phone || '', [Validators.required]],
     });
     return techForm;
+  }
+
+  save(tech: Technician): Observable<ApplicationQuery<Technician[]>> {
+    return this.httpclient
+      .post<ApplicationQuery<Technician[]>>(this.baseUrl + '/insert', tech)
+      .pipe(
+        map((res: any) => {
+          if (res?.error) {
+            throw new Error(res.error);
+          }
+          console.log(res.data);
+          return res;
+        })
+      );
   }
 }
