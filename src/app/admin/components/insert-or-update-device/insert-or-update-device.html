@@ -1,0 +1,48 @@
+<div class="form-container">
+  <div class="form-header">
+    <h3 class="form-title">{{ isEditMode ? 'Edit Device' : 'Add Device' }}</h3>
+    <mat-divider></mat-divider>
+  </div>
+
+  <form [formGroup]="deviceForm" class="insert-or-update-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Room</mat-label>
+      <mat-select formControlName="RoomId">
+        <mat-option *ngFor="let room of rooms" [value]="room.Id">
+          {{ room?.RoomNo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width"
+      ><mat-label>Identifier</mat-label>
+      <input matInput formControlName="Identifier" placeholder=" Enter identifier"
+    /></mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="Status">
+        <mat-option *ngFor="let status of ['Working', 'Not Working']" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width"
+      ><mat-label>Type</mat-label> <input matInput formControlName="Type" placeholder=" Enter Type"
+    /></mat-form-field>
+
+    <div class="form-actions">
+      <app-btn-success label="Discard" [disabled]="isLoading" (clicked)="onDiscard()" size="medium">
+      </app-btn-success>
+      <app-btn-danger
+        [label]="isEditMode ? 'Update' : 'Save'"
+        [disabled]="isLoading"
+        (clicked)="onSave()"
+        size="medium"
+      >
+      </app-btn-danger>
+      <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
+    </div>
+  </form>
+</div>

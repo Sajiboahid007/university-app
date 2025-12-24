@@ -25,8 +25,8 @@ export class RoomService {
     return roomForm;
   }
 
-  save(rooms: Room): Observable<ApplicationQuery<Room[]>> {
-    return this.httpClient.post<ApplicationQuery<[Room]>>(this.baseUrl + '/insert', rooms).pipe(
+  save(rooms: Room): Observable<ApplicationQuery<Room>> {
+    return this.httpClient.post<ApplicationQuery<Room>>(this.baseUrl + '/insert', rooms).pipe(
       map((response: any) => {
         if (response?.error) {
           throw new Error(response.error);

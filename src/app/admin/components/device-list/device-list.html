@@ -1,7 +1,13 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Device List</mat-card-title>
-    <mat-card-subtitle>Total Device: {{ device.length }}</mat-card-subtitle>
+  <mat-card-header class="card-header">
+    <div class="header-content">
+      <div>
+        <mat-card-title>Device List</mat-card-title>
+        <mat-card-subtitle>Total Device: {{ device.length }}</mat-card-subtitle>
+      </div>
+      <app-btn-success label="Add" size="medium" icon="add" (clicked)="addDevice()">
+      </app-btn-success>
+    </div>
   </mat-card-header>
 
   <mat-card-content>
@@ -11,7 +17,7 @@
       <ng-container matColumnDef="RoomNo">
         <th mat-header-cell *matHeaderCellDef>Room Name</th>
         <td mat-cell *matCellDef="let device">
-          {{ device.RoomId }}
+          {{ device?.Rooms?.RoomNo }}
         </td>
       </ng-container>
 

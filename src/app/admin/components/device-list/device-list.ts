@@ -5,6 +5,8 @@ import { DeviceService } from '../../services/device-service';
 import { MatPaginator } from '@angular/material/paginator';
 import { Device } from '../../../shared/entity-model/device';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { MatDialog } from '@angular/material/dialog';
+import { InsertOrUpdateDevice } from '../insert-or-update-device/insert-or-update-device';
 
 @Component({
   selector: 'app-device-list',
@@ -27,7 +29,8 @@ export class DeviceList implements OnInit, OnDestroy, AfterViewInit {
   }
   constructor(
     private readonly deviceService: DeviceService,
-    private readonly confirmationDialog: ConfirmationDialogService
+    private readonly confirmationDialog: ConfirmationDialogService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngAfterViewInit(): void {
@@ -51,6 +54,20 @@ export class DeviceList implements OnInit, OnDestroy, AfterViewInit {
         error: (error) => {
           console.error(error);
         },
+      });
+  }
+
+  addDevice(): void {
+    const dialog = this.dialog.open(InsertOrUpdateDevice, {
+      width: '600px',
+      autoFocus: true,
+    });
+
+    dialog
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.getDevice();
       });
   }
 

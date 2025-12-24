@@ -12,6 +12,7 @@ import { InsertOrUpdateLevel } from './components/insert-or-update-level/insert-
 import { InsertOrUpdateUnit } from './components/insert-or-update-unit/insert-or-update-unit';
 import { InsertOrUpdateRoom } from './components/insert-or-update-room/insert-or-update-room';
 import { InsertOrUpdateTechnician } from './components/insert-or-update-technician/insert-or-update-technician';
+import { InsertOrUpdateDevice } from './components/insert-or-update-device/insert-or-update-device';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { InsertOrUpdateTechnician } from './components/insert-or-update-technici
     InsertOrUpdateUnit,
     InsertOrUpdateRoom,
     InsertOrUpdateTechnician,
+    InsertOrUpdateDevice,
   ],
   imports: [SharedModule, AdminRoutingModule],
   exports: [],
