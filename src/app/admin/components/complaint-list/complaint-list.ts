@@ -5,6 +5,8 @@ import { Complaint } from '../../../shared/entity-model/complaint';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ConfirmationDialogService } from '../../../shared/services/confirmation-dialog.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { InsertOrUpdateComplaint } from '../insert-or-update-complaint/insert-or-update-complaint';
 
 @Component({
   selector: 'app-complaint-list',
@@ -30,7 +32,8 @@ export class ComplaintList implements OnInit, AfterViewInit {
 
   constructor(
     private readonly complaintSevice: CompalintService,
-    private readonly confirmationDialog: ConfirmationDialogService
+    private readonly confirmationDialog: ConfirmationDialogService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -51,6 +54,17 @@ export class ComplaintList implements OnInit, AfterViewInit {
           console.log(err);
         },
       });
+  }
+
+  addComplaint(): void {
+    const dialog = this.dialog.open(InsertOrUpdateComplaint, {
+      width: '600px',
+      autoFocus: true,
+    });
+
+    dialog.afterClosed().subscribe(() => {
+      this.getComplaint();
+    });
   }
 
   onDeleted(compalint: Complaint): void {

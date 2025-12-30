@@ -13,6 +13,7 @@ import { InsertOrUpdateUnit } from './components/insert-or-update-unit/insert-or
 import { InsertOrUpdateRoom } from './components/insert-or-update-room/insert-or-update-room';
 import { InsertOrUpdateTechnician } from './components/insert-or-update-technician/insert-or-update-technician';
 import { InsertOrUpdateDevice } from './components/insert-or-update-device/insert-or-update-device';
+import { InsertOrUpdateComplaint } from './components/insert-or-update-complaint/insert-or-update-complaint';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InsertOrUpdateDevice } from './components/insert-or-update-device/inser
     InsertOrUpdateRoom,
     InsertOrUpdateTechnician,
     InsertOrUpdateDevice,
+    InsertOrUpdateComplaint,
   ],
   imports: [SharedModule, AdminRoutingModule],
   exports: [],

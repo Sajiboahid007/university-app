@@ -1,0 +1,49 @@
+<div class="form-container">
+  <div class="form-header">
+    <h3 class="form-title">{{ isEditMode ? 'Edit Complaint' : 'Add Complaint' }}</h3>
+    <mat-divider></mat-divider>
+  </div>
+  <form [formGroup]="complaintForm" class="insert-or-update-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Device Name</mat-label>
+      <mat-select formControlName="DeviceId">
+        <mat-option *ngFor="let device of devices" [value]="device.Id">
+          {{ device?.Type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="Status">
+        <mat-option *ngFor="let status of ['Working', 'Not Working']" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="Description"
+        rows="4"
+        placeholder="Enter complaint description"
+      >
+      </textarea>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <app-btn-success label="Discard" [disabled]="isLoading" (clicked)="onDiscard()" size="medium">
+      </app-btn-success>
+      <app-btn-danger
+        [label]="isEditMode ? 'Update' : 'Save'"
+        [disabled]="isLoading"
+        (clicked)="onSave()"
+        size="medium"
+      >
+      </app-btn-danger>
+      <mat-spinner *ngIf="isLoading" diameter="40"></mat-spinner>
+    </div>
+  </form>
+</div>
